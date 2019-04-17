@@ -1,10 +1,357 @@
 <html>
-  <button onclick="click()">t</button>
-  <p id="T">1</p>
+  <body>
+
+  <div ondragstart="return false;" ondrop="return false;" class="testbox"
+ style="color: black;" id="one" onclick="oneClick()"></div>
+  
+  <div ondragstart="return false;" ondrop="return false;" class="testbox" id="two" onclick="twoClick()" style="color: black; position: absolute; top: 7px; left: 50px;"></div>
+  
+  <div ondragstart="return false;" ondrop="return false;" class="testbox" id="three" onclick="threeClick()" style=" color: black; position: absolute; top: 50px; left: 50px;"></div>
+  
+  <div ondragstart="return false;" ondrop="return false;" class="testbox" id="four" onclick="fourClick()" style="color: black; position: absolute; top: 50px; left: 8px;"></div>
+  
+  <p class="noselect" style="color: black; position: absolute; top: 0px; left: 100px;" id="points">0 points</p>
+  </div>
+
+  <div ondragstart="return false;" ondrop="return false;" id="cubeDrop" class="testboxNull" style="color: white; position: absolute; top: 7px; left: 200px;">+5</div>
+
+  <div ondragstart="return false;" ondrop="return false;" id="cubeDropLine" class="cubeLine" style="color: black; position: absolute; top: 98px; left: 200px;"></div>
+
+
+
+<button style="position: absolute; top: 40px; left: 98px;"  id="shop" onclick="openShop()">Shop</button>
+<button style="position: absolute; top: 115px; left: 180px;" class="h" id="upgradeCube" onclick="upgradeCube()">Upgrade(50)</button>
+</body>
+
+
+<div id="myModal" class="modal">
+
+
+  
+  
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="shop">
+    <button id="cubeButton" class="cubeDrop" onclick="buyCubeDrop()">Cube Drop(50)</button>
+
+  </div>
+
+</div>
+
 </html>
 
+<style>
+  .testbox {
+  border-left: 25px solid white;
+  height: 25px;
+}
+
+.testbox3 {
+  border-left: 25px solid black;
+  height: 25px;
+}
+
+.testboxNull {
+  border-left: 25px solid white;
+  height: 25px;  
+}
+
+.testbox2 {
+  border-left: 25px solid red;
+  height: 25px;
+}
+
+
+.cubeLine {
+  visibility: hidden;
+  border-left: 25px solid red;
+  height: 5px;
+}
+
+.cubeLineS {
+  visibility: visible;
+  border-left: 25px solid red;
+  height: 5px;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none; 
+            user-select: none; 
+}
+
+
+
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; 
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; 
+}
+
+
+.close {
+  color: black;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.cubeDrop {
+	-moz-box-shadow:inset 0px 39px 0px -24px #000000;
+	-webkit-box-shadow:inset 0px 39px 0px -24px #000000;
+	box-shadow:inset 0px 39px 0px -24px #000000;
+	background-color:#000000;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	border:1px solid #000000;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:3px 8px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #000000;
+}
+.cubeDrop:hover {
+	background-color:#000000;
+}
+.cubeDrop:active {
+	position:relative;
+	top:1px;
+}
+
+button.h {
+  visibility: hidden;
+}
+
+button.b {
+  visibility: visible;
+}
+</style>
+
 <script>
-  function click() {
-   document.getElementById("T").innerHTML = "Test123123"; 
+  var points = 1000;
+var one = "false";
+var two = "false";
+var three = "false";
+var four = "false";
+var cubeDroper = "false";
+var time = 1000;
+var timeCube = 250;
+var cubePoints = 5;
+var cubePrice = 50;
+var upCubePrice = 50;
+
+objCubeLine = document.getElementById("cubeDropLine");
+objCubeLine.class = "cubeLine";
+
+objupgradeCube = document.getElementById("upgradeCube");
+objupgradeCube.class = "upgradeCube";
+
+objCube = document.getElementById("cubeDrop");
+    objCube.style.color = "black";
+    objCube.style.top = "7px";
+    objCube.style.left = "200px";
+    objCube.class = "testboxNull";
+
+objOne = document.getElementById("one");
+    objOne.style.color = "black";
+    objOne.class = "testbox";
+
+objTwo = document.getElementById("two");
+    objTwo.style.color = "black";
+
+objThree = document.getElementById("three");
+    objThree.style.color = "black";
+
+objFour = document.getElementById("four");
+    objFour.style.color = "black";
+
+
+
+function oneClick() {
+  if (one == "true") {
+    points += 1;
+    $("#points").html(points + " points");
   }
+}
+
+function twoClick() {
+  if (two == "true") {
+    points += 1;
+    $("#points").html(points + " points");
+  }
+}
+
+function threeClick() {
+  if (three == "true") {
+    points += 1;
+    $("#points").html(points + " points");
+  }
+}
+
+function fourClick() {
+  if (four == "true") {
+    points += 1;
+    $("#points").html(points + " points");
+  }
+}
+
+
+
+function timeout() {
+    setTimeout(function () {
+var d = Math.floor((Math.random() * 4) + 1);
+  
+  if (d == 1) {
+    $(objOne).removeClass("testbox").addClass( "testbox2");
+    $(objTwo).removeClass("testbox2").addClass( "testbox");
+    $(objThree).removeClass("testbox2").addClass( "testbox");
+    $(objFour).removeClass("testbox2").addClass( "testbox");
+    one = "true";
+    two = "false";
+    three = "false";
+    four = "false";
+  }
+  
+  if (d == 2) {
+    $(objOne).removeClass("testbox2").addClass( "testbox");
+    $(objTwo).removeClass("testbox").addClass( "testbox2");
+    $(objThree).removeClass("testbox2").addClass( "testbox");
+    $(objFour).removeClass("testbox2").addClass( "testbox");
+    one = "false";
+    two = "true";
+    three = "false";
+    four = "false";
+  }
+  
+  if (d == 3) {
+    $(objOne).removeClass("testbox2").addClass( "testbox");
+    $(objTwo).removeClass("testbox2").addClass( "testbox");
+    $(objThree).removeClass("testbox").addClass( "testbox2");
+    $(objFour).removeClass("testbox2").addClass( "testbox");
+    one = "false";
+    two = "false";
+    three = "true";
+    four = "false";
+  }
+  
+  if (d == 4) {
+    $(objOne).removeClass("testbox2").addClass( "testbox");
+    $(objTwo).removeClass("testbox2").addClass( "testbox");
+    $(objThree).removeClass("testbox2").addClass( "testbox");
+    $(objFour).removeClass("testbox").addClass( "testbox2");
+    one = "false";
+    two = "false";
+    three = "false";
+    four = "true";
+  }
+  
+      timeout();
+    }, time);
+};
+  timeout();
+
+
+function timeout2() {
+    setTimeout(function () {
+      if (cubeDroper == "false") {
+        $("#cubeDrop").html("");
+      }
+  if (cubeDroper == "true") {   
+   $(objCubeLine).removeClass("cubeLine").addClass( "cubeLineS"); 
+   $(objupgradeCube).removeClass("h").addClass( "b"); 
+   $("#cubeDrop").html(" +" + cubePoints); $(objCube).removeClass("testboxNull").addClass( "testbox3");
+    objCube.style.top=parseInt(objCube.style.top)+1 +'px';
+      
+      if (objCube.style.top == "75px") {
+        objCube.style.top= "7px";
+        points += cubePoints;
+        $("#points").html(points + " points");
+      }
+      }
+   timeout2();
+    }, timeCube);
+};
+  timeout2();
+
+
+function buyCubeDrop() {
+  if (points >= cubePrice) {
+    points -= cubePrice;
+    cubePrice *= 2;
+    cubePrice = parseInt(cubePrice);
+    cubeDroper = "true";
+    $("#points").html(points + " points");
+    $("#cubeButton").html("Cube Drop(" + cubePrice + ")");
+    $("#cubeDrop").html("+" + cubePoints);
+  }
+}
+
+function upgradeCube() {
+    if (points >= upCubePrice) {
+      points -= upCubePrice 
+      upCubePrice *= 2;
+      upCubePrice /= 1.5;
+      upCubePrice = parseInt(upCubePrice);
+      timeCube -= 50;
+      cubePoints += 5;
+      $("#upgradeCube").html("Upgrade" + "(" + upCubePrice + ")");
+   }   
+}
+
+var modal = document.getElementById('myModal');
+
+
+var openShop = document.getElementById("shop");
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+openShop.onclick = function() {
+  modal.style.display = "block";
+}
+
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
 </script>
